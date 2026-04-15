@@ -1,3 +1,4 @@
+import sys
 import os
 import re
 import json
@@ -65,3 +66,7 @@ if __name__ == "__main__":
             print(f"    - {v}")
 
     generate_report(results)
+
+if report_data["summary"]["total_issues"] > 0:
+    print("[!] Vulnerabilities found! Failing pipeline...")
+    sys.exit(1)
