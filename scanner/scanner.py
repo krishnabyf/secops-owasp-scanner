@@ -55,6 +55,8 @@ def generate_report(results):
     print(f"[+] Total Issues Found: {report_data['summary']['total_issues']}")
     print("[+] Report saved to reports/report.json\n")
 
+    return report_data
+
 if __name__ == "__main__":
     print("[*] Starting SecOps Scan...\n")
 
