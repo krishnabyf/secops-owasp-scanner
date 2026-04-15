@@ -1,11 +1,32 @@
 name: Security Scan
 
-on: [push]
+on:
+  push:
+  pull_request:
 
 jobs:
   scan:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-      - name: Run Scanner
+      # 1️⃣ Checkout code
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # 2️⃣ Setup Python
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      # 3️⃣ Install dependencies (optional but professional)
+      - name: Install Dependencies
+        run: pip install -r requirements.txt || true
+
+      # 4️⃣ Run your scanner
+      - name: Run Security Scanner
         run: python3 scanner/scanner.py
+
+      # 5️⃣ Show report in logs (THIS IS YOUR NEW STEP ✅)
+      - name: Show Report
+        run: cat reports/report.json
