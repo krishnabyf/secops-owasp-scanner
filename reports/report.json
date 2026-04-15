@@ -1,0 +1,15 @@
+{
+    "scan_time": "2026-04-15 07:43:01.391035",
+    "summary": {
+        "total_vulnerable_files": 1,
+        "total_issues": 4
+    },
+    "details": {
+        "samples/vulnerable_app.py": [
+            "SQL Injection",
+            "Command Injection",
+            "Hardcoded Secrets",
+            "Insecure Deserialization"
+        ]
+    }
+}

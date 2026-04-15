@@ -44,9 +44,9 @@ def generate_report(results):
         "details": results
     }
 
-    os.makedirs("../reports", exist_ok=True)
+    os.makedirs("reports", exist_ok=True)
 
-    with open("../reports/report.json", "w") as f:
+    with open("reports/report.json", "w") as f:
         json.dump(report_data, f, indent=4)
 
     print("\n[+] Scan Completed")
@@ -57,7 +57,7 @@ def generate_report(results):
 if __name__ == "__main__":
     print("[*] Starting SecOps Scan...\n")
 
-    results = scan_directory("../samples")
+    results = scan_directory("samples")
 
     for file, vulns in results.items():
         print(f"[!] {file}")
