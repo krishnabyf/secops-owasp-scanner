@@ -1,26 +1,41 @@
 # SecOps OWASP Scanner
 
-## Features
-- Detects OWASP Top 10 vulnerabilities
-- Automated code scanning (Python, JS, Go)
-- Auto-fix engine
-- JSON report generation
+A compact static-analysis portfolio project that demonstrates security-rule design,
+automated findings, JSON reporting, regression tests, and CI evidence.
 
-## Vulnerabilities Covered
-- SQL Injection
-- Command Injection
-- Hardcoded Secrets
+## Current Coverage
 
-## Run Scanner
+- SQL injection patterns
+- Command execution risks
+- Hardcoded password patterns
+- Insecure Python deserialization
+
+This is an educational scanner, not a replacement for Semgrep, CodeQL, Bandit, or a
+professional application-security assessment.
+
+## Run
+
+```bash
 python3 scanner/scanner.py
+cat reports/report.json
+```
 
-## Generate Report
-python3 scripts/report.py
+To use findings as a policy gate:
 
-## Auto Fix
-python3 auto_fix/fixer.py
+```bash
+python3 scanner/scanner.py --fail-on-findings
+```
 
-## Future Enhancements
-- CI/CD integration
-- Cloud security scanning
-- Kubernetes scanning
+## Test
+
+```bash
+python3 -m unittest discover -s tests -v
+```
+
+The GitHub Actions workflow treats findings in the intentionally vulnerable sample as
+successful detection evidence, uploads the JSON report, and fails only when the scanner or
+tests are broken.
+
+## License
+
+MIT

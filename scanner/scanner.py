@@ -2,6 +2,7 @@ import os
 import re
 import json
 import sys
+import argparse
 from datetime import datetime
 
 VULNERABILITIES = {
@@ -57,7 +58,15 @@ def generate_report(results):
 
     return report_data
 
-if __name__ == "__main__":
+def main():
+    parser = argparse.ArgumentParser(description="Scan Python samples for common security risks.")
+    parser.add_argument(
+        "--fail-on-findings",
+        action="store_true",
+        help="Return a non-zero exit code when findings are detected.",
+    )
+    args = parser.parse_args()
+
     print("[*] Starting SecOps Scan...\n")
 
     results = scan_directory("samples")
@@ -67,10 +76,12 @@ if __name__ == "__main__":
         for v in vulns:
             print(f"    - {v}")
 
-    # ✅ generate report and capture result
     report_data = generate_report(results)
 
-    # ✅ fail pipeline if vulnerabilities found
-    if report_data["summary"]["total_issues"] > 0:
+    if args.fail_on_findings and report_data["summary"]["total_issues"] > 0:
         print("[!] Vulnerabilities found! Failing pipeline...")
         sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
